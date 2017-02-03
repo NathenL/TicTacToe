@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.Random;
 
 
@@ -45,6 +44,7 @@ public class GameBoard extends AppCompatActivity {
         board[2][1] = (Button)findViewById(R.id.button3_2);
         board[2][2] = (Button)findViewById(R.id.button3_3);
 
+        // New Game button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +57,62 @@ public class GameBoard extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
     }
 
     /**
-     *
+     * Save state on app pause or orientation shift
+     * @param SIS
+     */
+    @Override
+    public void onSaveInstanceState(Bundle SIS) {
+        super.onSaveInstanceState(SIS);
+        String[] boardText = new String[9];
+        int count = 0;
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                boardText[count] = board[i][j].getText().toString();
+                count++;
+            }
+        }
+
+        SIS.putStringArray("Board", boardText);
+        SIS.putChar("Turn", turn);
+        SIS.putBoolean("Gameover", gameover);
+        SIS.putString("Text", text.getText().toString());
+    }
+
+    /**
+     * Reload state on app pause or orientation shift
+     * @param SIS
+     */
+    @Override
+    public void onRestoreInstanceState(Bundle SIS) {
+        super.onRestoreInstanceState(SIS);
+
+        String[] boardText = SIS.getStringArray("Board");
+        int count = 0;
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                board[i][j].setText(boardText[count]);
+                if (board[i][j].getText().toString().equals("X")){
+                    board[i][j].setTextColor(Color.parseColor("#f44336"));
+                }
+                else {
+                    board[i][j].setTextColor(Color.parseColor("#FF42A5F5"));
+                }
+                count++;
+            }
+        }
+        turn = SIS.getChar("Turn");
+        gameover = SIS.getBoolean("Gameover");
+        text.setText(SIS.getString("Text"));
+    }
+
+    /**
+     * Reset the board and start a new game
      */
     private void newGame(){
+        // Set random player start
         Random r = new Random();
         this.turn = "XO".charAt(r.nextInt(2));
         for (int i = 0; i < 3; i++){
@@ -71,10 +120,11 @@ public class GameBoard extends AppCompatActivity {
                 board[i][j].setText("");
             }
         }
+        setColors(null);
     }
 
     /**
-     *
+     * Check the board for winning states
      */
     private void checkBoard(){
         String winner = "";
@@ -82,6 +132,7 @@ public class GameBoard extends AppCompatActivity {
             gameover = true;
             text.setTextSize(60);
             text.setText("The winner is "+winner+"s!");
+            setColors(null);
         }
         else {
             boolean tie = true;
@@ -96,6 +147,7 @@ public class GameBoard extends AppCompatActivity {
             if (tie){
                 gameover = true;
                 text.setText("Tie Game!");
+                text.setTextColor(Color.parseColor("#FFFDD835"));
             }
         }
     }
@@ -103,7 +155,7 @@ public class GameBoard extends AppCompatActivity {
     /**
      * Checks the rows of the board. If they find 3 in a row, return winner character (X,O)
      * Otherwise return empty String ""
-     * @return char
+     * @return String winner
      */
     private String checkRows(){
         String winner = "";
@@ -125,8 +177,9 @@ public class GameBoard extends AppCompatActivity {
     }
 
     /**
-     *
-     * @return
+     * Checks the columns of the board. If they find 3 in a row, return winner character (X,O)
+     * Otherwise return empty String ""
+     * @return String winner
      */
     private String checkCols(){
         String winner = "";
@@ -146,8 +199,9 @@ public class GameBoard extends AppCompatActivity {
     }
 
     /**
-     *
-     * @return
+     * Checks the diagnals of the board. If they find 3 in a row, return winner character (X,O)
+     * Otherwise return empty String ""
+     * @return String winner
      */
     private String checkDiag(){
         String winner = "";
@@ -164,7 +218,7 @@ public class GameBoard extends AppCompatActivity {
     }
 
     /**
-     *
+     * Onclick event handler
      * @param v
      */
     public void onClick(View v) {
@@ -172,6 +226,7 @@ public class GameBoard extends AppCompatActivity {
             int id = v.getId();
             Button b = null;
 
+            // What button was pressed
             switch(id){
                 case R.id.button1_1:
                     b = board[0][0];
@@ -204,18 +259,30 @@ public class GameBoard extends AppCompatActivity {
             if (b != null && b.getText() == "") {
                 b.setText(Character.toString(turn));
                 //b.setTextColor((turn == 'X') ? "@color/colorPrimary" : "@color/colorOs");
-                if (turn == 'X'){
-                    b.setTextColor(Color.parseColor("#f44336"));
-                }
-                else {
-                    b.setTextColor(Color.parseColor("#FF42A5F5"));
-                }
+                setColors(b);
                 checkBoard();
                 if (!gameover) {
                     turn = (turn == 'X') ? 'O' : 'X';
                     text.setText("It's "+turn+"s Turn");
                 }
             }
+        }
+    }
+
+    private void setColors(Button b){
+        if (turn == 'X'){
+            if (b != null){
+                b.setTextColor(Color.parseColor("#f44336"));
+                text.setTextColor(Color.parseColor("#FF42A5F5"));
+            }
+            else text.setTextColor(Color.parseColor("#f44336"));
+        }
+        else {
+            if (b != null){
+                b.setTextColor(Color.parseColor("#FF42A5F5"));
+                text.setTextColor(Color.parseColor("#f44336"));
+            }
+            else text.setTextColor(Color.parseColor("#FF42A5F5"));
         }
     }
 }

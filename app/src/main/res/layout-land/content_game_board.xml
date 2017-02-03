@@ -14,23 +14,23 @@
     tools:showIn="@layout/activity_game_board">
 
     <Button
-        android:text="T"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button1_1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:onClick="onClick"/>
 
     <Button
-        android:text="I"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button1_2"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_alignParentTop="true"
@@ -39,11 +39,11 @@
         android:onClick="onClick"/>
 
     <Button
-        android:text="C"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button1_3"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_alignParentTop="true"
@@ -53,11 +53,11 @@
 
 
     <Button
-        android:text="T"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button2_1"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_below="@+id/button1_1"
@@ -65,11 +65,11 @@
         android:onClick="onClick"/>
 
     <Button
-        android:text="A"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button2_2"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_below="@+id/button1_2"
@@ -77,11 +77,11 @@
         android:onClick="onClick"/>
 
     <Button
-        android:text="C"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button2_3"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_below="@+id/button1_3"
@@ -89,11 +89,11 @@
         android:onClick="onClick"/>
 
     <Button
-        android:text="T"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button3_1"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_below="@+id/button2_1"
@@ -101,11 +101,11 @@
         android:onClick="onClick"/>
 
     <Button
-        android:text="O"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button3_2"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_below="@+id/button2_2"
@@ -113,11 +113,11 @@
         android:onClick="onClick"/>
 
     <Button
-        android:text="E"
+        android:text=""
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:id="@+id/button3_3"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="40sp"
         android:textColor="@color/colorPrimary"
         android:layout_below="@+id/button2_3"
